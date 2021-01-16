@@ -1,0 +1,123 @@
+<div class= 'form'>
+  <%= form_with url: person_import_data_path do |f| %>
+    <div class="custom-file" style= 'width: 260px;'>
+      <%= f.file_field :file, required: true, class: "custom-file-input" , id: "customFile" %>
+      <label class="custom-file-label" for="customFile">Choose file</label>
+      <%= f.submit 'Submit', class: 'btn btn-success', style: 'margin-top: 9px;' %>
+    </div>
+  <% end %>
+  </div>
+
+  <style>
+  #person-table_wrapper{
+    position: relative;
+    margin-top: 50px;
+}
+  </style>
+
+  <table class="table" id='person-table'>
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Species</th>
+        <th scope="col">Affilations</th>
+        <th scope="col">Weapon</th>
+        <th scope="col">Vehicle</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+
+  </table>
+
+
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+
+$('#person-table').DataTable({
+      "language": {
+          search: "",
+          emptyTable: "No data available",
+          searchPlaceholder: "Search"
+      },
+      "processing": false,
+      "pagingType": "full_numbers",
+      "serverSide": true,
+      "searching": true,
+      "info": false,
+      "pagingType": "simple_numbers",
+      "bSort": true,
+      "destroy": true,
+      "lengthMenu": [10, 25, 50, 100],
+      "ajax": {
+          "url": window.location.href,
+          "type": "GET",
+          "dataSrc": function(json) {
+              return json.data;
+          }
+      },
+
+      "columns": [{
+              "data": "first_name",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.first_name
+              }
+          },
+          {
+              "data": "last_name",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.last_name
+              }
+          },
+          {
+              "data": "gender",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.gender
+              }
+          },
+          {
+              "data": "species",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.species
+              }
+          },
+          {
+              "data": "affiliations",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.affiliations
+              }
+          },
+          {
+              "data": "weapon",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.weapon
+              }
+          },
+          {
+              "data": "vehicle",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.vehicle
+              }
+          },
+          {
+              "data": "locations",
+              "className": "",
+              "render": function(data, type, object) {
+                  return object.locations
+              }
+          },
+        ],
+  });
+</script>

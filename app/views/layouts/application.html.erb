@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SentiaCodeingTest</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= javascript_include_tag 'application',media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style= 'position: relative; top: 68px;'>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-info"><%= msg %></div>
+  <% end %>
+  <div class='container'>
+    <%= yield %>
+    <div>
+  </body>
+</html>
